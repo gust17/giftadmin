@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect(url('admin/login'));
 });
+Route::get('/home', function () {
+    return redirect(url('admin/dashboard'));
+});
