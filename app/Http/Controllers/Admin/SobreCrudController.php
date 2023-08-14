@@ -62,6 +62,7 @@ class SobreCrudController extends CrudController
                 'disk' => 'public',
                 'path' => 'site',
             ]);
+        CRUD::field('texto')->type('summernote');
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
