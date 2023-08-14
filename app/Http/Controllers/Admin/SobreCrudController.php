@@ -28,7 +28,7 @@ class SobreCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Sobre::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/sobre');
-        CRUD::setEntityNameStrings('sobre', 'sobres');
+        CRUD::setEntityNameStrings('sobre nós', 'sobre nós');
     }
 
     /**
