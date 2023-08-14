@@ -32,7 +32,7 @@ class CartaoCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Cartao::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/cartao');
-        CRUD::setEntityNameStrings('cartão', 'cartãos');
+        CRUD::setEntityNameStrings('cartão', 'cartões');
     }
 
     /**
