@@ -40,7 +40,7 @@ class SobreCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
-
+        CRUD::colunb('texto')->type('summernote');
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
@@ -62,7 +62,7 @@ class SobreCrudController extends CrudController
                 'disk' => 'public',
                 'path' => 'site',
             ]);
-        CRUD::field('texto')->type('summernote');
+
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
