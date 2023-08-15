@@ -60,7 +60,7 @@ class CategoriaCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CategoriaRequest::class);
-        CRUD::field('caminho')
+        CRUD::field('img')
             ->type('upload')
             ->withFiles([
                 'disk' => 'public',
