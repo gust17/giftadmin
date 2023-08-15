@@ -64,7 +64,7 @@ class CategoriaCrudController extends CrudController
             ->type('upload')
             ->withFiles([
                 'disk' => 'public',
-                'path' => 'aniversario',
+                'path' => 'categoria',
             ]);
         CRUD::setFromDb(); // set fields from db columns.
 
