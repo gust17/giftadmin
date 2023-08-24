@@ -39,7 +39,7 @@ class CategoriaCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('img')->type('image')->withFiles([
+        CRUD::column('caminho')->type('image')->withFiles([
             'disk' => 'public', // the disk where file will be stored
             'path' => 'categoria', // the path inside the disk where file will be stored
         ]);
@@ -60,7 +60,7 @@ class CategoriaCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CategoriaRequest::class);
-        CRUD::field('img')
+        CRUD::field('caminho')
             ->type('upload')
             ->withFiles([
                 'disk' => 'public',
