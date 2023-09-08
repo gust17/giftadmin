@@ -25,7 +25,7 @@ class CartaoRequest extends FormRequest
     public function rules()
     {
         return [
-             'caminho' => 'required',
+             'caminho' => 'required|file|mimes:png,jpeg,jpg,gif',
              'categoria_id' => 'required'
         ];
     }
