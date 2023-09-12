@@ -10,3 +10,6 @@
 <x-backpack::menu-item title="Parceiras" icon="la la-question" :link="backpack_url('parceira')" />
 <x-backpack::menu-item title="Cabeçalho" icon="la la-question" :link="backpack_url('topo')" />
 <x-backpack::menu-item title="Termos" icon="la la-question" :link="backpack_url('termo')" />
+
+<x-backpack::menu-item title="User lojas" icon="la la-question" :link="backpack_url('user-loja')" />
+<x-backpack::menu-item title="User clientes" icon="la la-question" :link="backpack_url('user-cliente')" />
