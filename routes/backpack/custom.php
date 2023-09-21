@@ -16,11 +16,14 @@ Route::group([
     ),
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-//    Route::get('dashboard',function (){
-//        $userClientes = \App\Models\UserCliente::all();
-//
-//        dd($userClientes);
-//    });
+    Route::get('dashboard',function (){
+        $userClientes = \App\Models\UserCliente::all();
+        $parceiras = \App\Models\Parceira::all();
+        $presentes = \App\Models\Presente::all();
+
+        return view('dashboard',compact('userClientes','parceiras','presentes'));
+
+    });
     Route::crud('user', 'UserCrudController');
     Route::crud('categoria', 'CategoriaCrudController');
     Route::crud('pergunta', 'PerguntaCrudController');
