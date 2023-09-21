@@ -32,4 +32,5 @@ Route::group([
     Route::crud('termo', 'TermoCrudController');
     Route::crud('user-loja', 'UserLojaCrudController');
     Route::crud('user-cliente', 'UserClienteCrudController');
+    Route::crud('responsavel', 'ResponsavelCrudController');
 }); // this should be the absolute last line of this file

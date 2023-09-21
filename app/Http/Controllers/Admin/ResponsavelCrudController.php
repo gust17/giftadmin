@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CategoriaRequest;
+use App\Http\Requests\ResponsavelRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class CategoriaCrudController
+ * Class ResponsavelCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class CategoriaCrudController extends CrudController
+class ResponsavelCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -21,28 +21,24 @@ class CategoriaCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     *
+     * 
      * @return void
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Categoria::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/categoria');
-        CRUD::setEntityNameStrings('categoria', 'categorias');
+        CRUD::setModel(\App\Models\Responsavel::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/responsavel');
+        CRUD::setEntityNameStrings('responsavel', 'responsavels');
     }
 
     /**
      * Define what happens when the List operation is loaded.
-     *
+     * 
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::column('img')->type('image')->withFiles([
-            'disk' => 'public', // the disk where file will be stored
-            'path' => 'categoria', // the path inside the disk where file will be stored
-        ]);
         CRUD::setFromDb(); // set columns from db columns.
 
         /**
@@ -53,19 +49,13 @@ class CategoriaCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     *
+     * 
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(CategoriaRequest::class);
-        CRUD::field('img')
-            ->type('upload')
-            ->withFiles([
-                'disk' => 'public',
-                'path' => 'categoria',
-            ]);
+        CRUD::setValidation(ResponsavelRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
@@ -76,7 +66,7 @@ class CategoriaCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     *
+     * 
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

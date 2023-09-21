@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UserLojaRequest;
+use App\Models\Responsavel;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -39,8 +40,9 @@ class UserLojaCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
-
+       // CRUD::setFromDb(); // set columns from db columns.
+        CRUD::addColumn('name');
+        CRUD::addColumn('email');
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
@@ -55,16 +57,49 @@ class UserLojaCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+        CRUD::field([
+            'label' => "Loja",
+            'type' => 'select',
+            'name' => 'parceira', // the db column for the foreign key
+
+            // optional
+            // 'entity' should point to the method that defines the relationship in your Model
+            // defining entity will make Backpack guess 'model' and 'attribute'
+
+            // optional - manually specify the related model and attribute
+            'model' => "App\Models\Parceira", // related model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+
+            // optional - force the related options to be a custom query, instead of all();
+            'options' => (function ($query) {
+                return $query->orderBy('name', 'ASC')->get();
+            }), //  you can use this to filter the results show in the select
+        ]);
+        CRUD::field([   // radio
+            'name' => 'tipo', // the name of the db column
+            'label' => 'Tipo de Usuário', // the input label
+            'type' => 'radio',
+            'options' => [
+                // the key will be stored in the db, the value will be shown as label;
+                0 => "Comum",
+                1 => "Admin"
+            ],
+            // optional
+            'inline' => true, // show the radios all on the same line?
+        ]);
+        CRUD::removeField('password');
         CRUD::field('name')
             ->type('text')->label('Nome');
+        CRUD::field('cpf')
+            ->type('text')->label('CPF');
+        CRUD::field('whatsapp')
+            ->type('text')->label('Whatsapp');
+        CRUD::field('email')
+            ->type('email')->label('Email');
 
-        CRUD::field(['type'          => "relationship",
-            'name'          => 'category',
-            'ajax'          => true,
-            'inline_create' => true, // <--- THIS
-        ]);
+
         CRUD::setValidation(UserLojaRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
+        //CRUD::setFromDb(); // set fields from db columns.
 
         /**
          * Fields can be defined using the fluent syntax:
@@ -82,4 +117,27 @@ class UserLojaCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    public function store(UserLojaRequest $request)
+    {
+        // Acesse os dados da requisição
+        $data = $request->all();
+
+        // Adicione campos extras, se necessário
+        $data['password'] = bcrypt($data['cpf']);
+
+        //dd($data);
+
+
+        // Crie o recurso
+        $item = $this->crud->create($data);
+
+
+        Responsavel::create(['user_id'=>$item->id,'parceira_id'=>$data['parceira'],'adminstrador'=>$data['tipo']]);
+
+        // Redirecione para a página de listagem após a criação
+        return redirect($this->crud->route);
+    }
+
+
 }

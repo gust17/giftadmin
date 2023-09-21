@@ -6,7 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserLoja extends Model
+class Responsavel extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -16,15 +16,14 @@ class UserLoja extends Model
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    protected $connection = "mysql3";
-    protected $table = 'users';
+
+    protected $connection = 'mysql3';
+    protected $table = 'responsavels';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
-
-
 
     /*
     |--------------------------------------------------------------------------
