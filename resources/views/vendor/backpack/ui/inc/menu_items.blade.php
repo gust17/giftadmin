@@ -14,3 +14,5 @@
 <x-backpack::menu-item title="Usuarios Lojas" icon="la la-question" :link="backpack_url('user-loja')" />
 <x-backpack::menu-item title="Clientes" icon="la la-question" :link="backpack_url('user-cliente')" />
 <x-backpack::menu-item title="Responsavels" icon="la la-question" :link="backpack_url('responsavel')" />
+
+<x-backpack::menu-item title="Presentes" icon="la la-question" :link="backpack_url('presente')" />
