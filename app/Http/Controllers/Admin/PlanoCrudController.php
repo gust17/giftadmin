@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ParceiraRequest;
-use App\Models\Contrato;
-use App\Models\Parceira;
-use App\Models\Plano;
-
+use App\Http\Requests\PlanoRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 
 /**
- * Class ParceiraCrudController
+ * Class PlanoCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class ParceiraCrudController extends CrudController
+class PlanoCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -33,14 +27,9 @@ class ParceiraCrudController extends CrudController
     public function setup()
     {
 
-
-        $this->crud->addButton('line', 'planos-butao', 'view', 'planos-butao', 'begin');
-
-
-
-        CRUD::setModel(\App\Models\Parceira::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/parceira');
-        CRUD::setEntityNameStrings('parceira', 'parceiras');
+        CRUD::setModel(\App\Models\Plano::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/plano');
+        CRUD::setEntityNameStrings('plano', 'planos');
     }
 
     /**
@@ -51,7 +40,6 @@ class ParceiraCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::addButtonFromView('line', 'planos-butao', 'planoloja', 'beginning');
         CRUD::setFromDb(); // set columns from db columns.
 
         /**
@@ -68,16 +56,9 @@ class ParceiraCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ParceiraRequest::class);
-        CRUD::field('name')->label('Nome');
-        CRUD::field('logo')->label('Imagem')
-            ->type('upload')
-            ->withFiles([
-                'disk' => 'public',
-                'path' => 'site',
-            ]);
+        CRUD::setValidation(PlanoRequest::class);
+        CRUD::field('name')->type('text')->label('Nome');
         CRUD::setFromDb(); // set fields from db columns.
-        CRUD::field('site')->label('Site')->type('url');
 
         /**
          * Fields can be defined using the fluent syntax:
@@ -94,27 +75,5 @@ class ParceiraCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-
-    public function planoloja($id)
-    {
-
-        $parceira = Parceira::find($id);
-        $planos = Plano::all();
-
-
-
-        $planoAtual = $parceira->contratos()->latest('created_at')->first();
-
-       return view('planoloja',compact('parceira','planoAtual','planos'));
-    }
-
-
-    public function cadPlano(Request $request)
-    {
-        //dd($request->all());
-        Contrato::create($request->all());
-
-        return redirect()->back();
     }
 }

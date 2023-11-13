@@ -6,7 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parceira extends Model
+class Plano extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -16,8 +16,8 @@ class Parceira extends Model
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-    protected $connection = 'mysql2';
-    protected $table = 'parceiras';
+    protected $connection ='mysql2';
+    protected $table = 'planos';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -35,11 +35,6 @@ class Parceira extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function contratos()
-    {
-        return $this->hasMany(Contrato::class);
-    }
 
     /*
     |--------------------------------------------------------------------------

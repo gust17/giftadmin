@@ -37,4 +37,9 @@ Route::group([
     Route::crud('user-cliente', 'UserClienteCrudController');
     Route::crud('responsavel', 'ResponsavelCrudController');
     Route::crud('presente', 'PresenteCrudController');
+    Route::crud('plano', 'PlanoCrudController');
+    Route::get('parceira/{id}/planoloja', [\App\Http\Controllers\Admin\ParceiraCrudController::class,'planoloja']);
+
+    Route::post('cadastraTaxa',[\App\Http\Controllers\Admin\ParceiraCrudController::class,'cadPlano']);
+
 }); // this should be the absolute last line of this file
