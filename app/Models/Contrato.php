@@ -22,6 +22,6 @@ class Contrato extends Model
 
     public function plano()
     {
-        return $this->belongsTo(Plano::class);
+        return $this->belongsTo(Plano::class,'plano_id','id');
     }
 }

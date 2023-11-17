@@ -42,4 +42,13 @@ Route::group([
 
     Route::post('cadastraTaxa',[\App\Http\Controllers\Admin\ParceiraCrudController::class,'cadPlano']);
 
+   Route::get('saque',function (){
+
+       $saques = \App\Models\Saque::all();
+
+       return view('saques',compact('saques'));
+   });
+
+   Route::get('saque/{id}/baixa',[\App\Http\Controllers\Admin\SaqueCrudController::class,'darBaixa']);
+
 }); // this should be the absolute last line of this file

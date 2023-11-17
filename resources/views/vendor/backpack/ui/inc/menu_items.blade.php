@@ -17,3 +17,4 @@
 
 <x-backpack::menu-item title="Presentes" icon="la la-question" :link="backpack_url('presente')" />
 <x-backpack::menu-item title="Planos" icon="la la-question" :link="backpack_url('plano')" />
+<x-backpack::menu-item title="Saques" icon="la la-question" :link="backpack_url('saque')" />
